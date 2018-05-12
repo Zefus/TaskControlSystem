@@ -25,6 +25,11 @@ namespace TaskControlSystem.DataAccess.Models
 
         public bool IsTerminal
         {
+            get => ChildSystemTasks == null ? true : false;
+        }
+
+        public bool IsRoot
+        {
             get => ParentSystemTask == null ? true : false;
         }
 

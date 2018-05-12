@@ -43,10 +43,13 @@
   <ItemGroup>
     <Compile Include="IAddSubTaskOperation.cs" />
     <Compile Include="ICreateTaskOperation.cs" />
+    <Compile Include="IEditTaskOperation.cs" />
     <Compile Include="Operations\AddSubTaskOperation.cs" />
     <Compile Include="Operations\CreateTaskOperation.cs" />
+    <Compile Include="Operations\EditTaskOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskViewModels\CreateTaskViewModel.cs" />
+    <Compile Include="TaskViewModels\EditTaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
