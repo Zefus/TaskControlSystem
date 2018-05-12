@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAddSubTaskOperation.cs" />
     <Compile Include="ICreateTaskOperation.cs" />
+    <Compile Include="Operations\AddSubTaskOperation.cs" />
     <Compile Include="Operations\CreateTaskOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskViewModels\CreateTaskViewModel.cs" />
