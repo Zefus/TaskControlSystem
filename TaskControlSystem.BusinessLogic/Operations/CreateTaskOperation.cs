@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TaskControlSystem.BusinessLogic.TaskViewModels;
 using System.ComponentModel.Composition;
 using TaskControlSystem.Infrastructure;
@@ -26,9 +25,8 @@ namespace TaskControlSystem.BusinessLogic.Operations
                 Title = createTaskViewModel.Title,
                 Description = createTaskViewModel.Descriptiion,
                 Executors = createTaskViewModel.Executors,
-                Status = createTaskViewModel.Status,
-                RegisterDate = createTaskViewModel.RegisterDate,
-                CompletionDate = createTaskViewModel.CompletionDate,
+                Status = TaskStatus.Appointed,
+                RegisterDate = DateTime.Now,
                 ParentSystemTask = null
             };
 

@@ -59,5 +59,8 @@
                                     SelectedItem_="{Binding SelectedTask, Mode=TwoWay}"/>
             </ScrollViewer>
         </GroupBox>
+
+        <local:CreateTaskControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="5"/>
+
     </Grid>
 </Window>

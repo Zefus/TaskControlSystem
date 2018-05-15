@@ -46,6 +46,7 @@ namespace TaskControlSystem.Views
 
             //viewModel.func();
             viewModel.ReloadTasks();
+            //viewModel.CreateTask();
             window.Show();
         }
 

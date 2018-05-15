@@ -25,7 +25,7 @@ namespace TaskControlSystem.BusinessLogic.Operations
                 Title = childTask.Title,
                 Description = childTask.Descriptiion,
                 Executors = childTask.Executors,
-                Status = childTask.Status,
+                Status = TaskStatus.Appointed,
                 RegisterDate = childTask.RegisterDate,
                 CompletionDate = childTask.CompletionDate,
                 ParentSystemTask = parentTask

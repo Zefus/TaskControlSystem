@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="TaskControlSystem.Views.CreateTaskControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TaskControlSystem.Views"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="350">
+
+    <GroupBox Header="Новая задача">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0"
+                           VerticalAlignment="Center"
+                           Text="Название задачи:" FontWeight="Bold" FontSize="13"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                         Text="{Binding Path=CreateTaskViewModel.Title}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                           VerticalAlignment="Center"
+                           Text="Описание задачи:" FontWeight="Bold" FontSize="13"/>
+            <TextBox Grid.Row="3" Grid.RowSpan="2" 
+                         Grid.ColumnSpan="2" Grid.Column="0" Margin="5"
+                         Text="{Binding Path=CreateTaskViewModel.Description}"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="0"
+                           VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
+                           Text="Список исполнителей:"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="5"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         Text="{Binding Path=CreateTaskViewModel.Executors}"/>
+
+            <!--<TextBlock Grid.Row="5" Grid.Column="0"
+                           VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
+                           Text="Дата регистрации:"/>
+            <DatePicker Grid.Row="5" Grid.Column="1"
+                            VerticalAlignment="Center"
+                            SelectedDate="{Binding CreateTaskViewModel.RegisterDate, Mode=TwoWay,
+                                                   TargetNullValue={x:Static System:DateTime.Now}}"/>-->
+
+            <!--<TextBlock Grid.Row="6" Grid.Column="0"
+                           VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
+                           Text="Дата завершения:"/>
+            <DatePicker Grid.Row="6" Grid.Column="1"
+                            VerticalAlignment="Center"
+                            SelectedDate="{Binding CreateTaskViewModel.CompletionDate, Mode=TwoWay, 
+                                                   TargetNullValue={x:Static System:DateTime.Now}}"/>-->
+
+            <TextBlock Grid.Row="7" Grid.Column="0"
+                           VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
+                           Text="Планируемое время выполнения:"/>
+            <TextBlock Grid.Row="7" Grid.Column="1"
+                           VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid HorizontalAlignment="Stretch" Width="92" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox   Grid.Column="0"
+                                   Text="{Binding CreateTaskViewModel.PlanCompletionTime, Mode=OneWay}"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalContentAlignment="Center"
+                                   HorizontalContentAlignment="Center"/>
+                        <Label Grid.Column="1" Content="Дней"
+                               HorizontalAlignment="Center"/>
+                    </Grid>
+            </TextBlock>
+
+            <!--<TextBlock Grid.Row="7" Grid.Column="0"
+                           VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
+                           Text="Назначить статус:"/>
+            <ComboBox Grid.Row="7" Grid.Column="1" Margin="5"
+                          VerticalAlignment="Center"
+                          ItemsSource="{local:EnumValues {x:Type loc:TaskStatus}}"
+                          SelectedValuePath="EnumValue" DisplayMemberPath="DisplayString"
+                          SelectedValue="{Binding Path=Status, Mode=TwoWay}"/>-->
+            <Button Grid.Row="10" Grid.Column="0" Margin="7"
+                        Content="Сохранить"
+                        Command="{Binding CreateTaskCommand}"/>
+            <Button Grid.Row="10" Grid.Column="1" Margin="7"
+                    Content="Отмена"/>
+        </Grid>
+    </GroupBox>
+</UserControl>
