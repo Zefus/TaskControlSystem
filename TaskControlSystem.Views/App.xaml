@@ -1,8 +1,7 @@
-﻿<Application x:Class="TaskControlSystem.Terminal.App"
+﻿<Application x:Class="TaskControlSystem.Views.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:TaskControlSystem.Terminal"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:TaskControlSystem.Views">
     <Application.Resources>
          
     </Application.Resources>

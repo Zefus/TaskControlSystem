@@ -14,5 +14,6 @@ namespace TaskControlSystem.BusinessLogic.TaskViewModels
         public TaskStatus Status { get; set; }
         public DateTime RegisterDate { get; set; }
         public DateTime CompletionDate { get; set; }
+        public int? PlanCompletionTime { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace TaskControlSystem.Infrastructure
                 var repository = new EntityRepository<TEntity>(_dbContext);
 
                 return repository;
-            }
+        }
 
             return ServiceLocator.GetInstance<IRepository<TEntity>>();
         }

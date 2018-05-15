@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C0429CBD-1B03-477C-B5F0-85F3A42A5B7A}</ProjectGuid>
+    <ProjectGuid>{32D93F99-020D-43AC-9A43-83F3EBBE0138}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TaskControlSystem.Terminal</RootNamespace>
-    <AssemblyName>TaskControlSystem.Terminal</AssemblyName>
+    <RootNamespace>TaskControlSystem.Views</RootNamespace>
+    <AssemblyName>TaskControlSystem.Views</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,7 +34,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Mef.CommonServiceLocator, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.MefAdapter.1.0\lib\Microsoft.Mef.CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,8 +68,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtendedTreeView.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -77,6 +100,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -84,6 +108,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskControlSystem.BusinessLogic\TaskControlSystem.BusinessLogic.csproj">
+      <Project>{cb4f2a81-d5ec-453c-882a-811c20a1165b}</Project>
+      <Name>TaskControlSystem.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskControlSystem.DataAccess\TaskControlSystem.DataAccess.csproj">
+      <Project>{e7ae80c0-2977-4c7c-8e73-d1458fc6877f}</Project>
+      <Name>TaskControlSystem.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskControlSystem.Infrastructure\TaskControlSystem.Infrastructure.csproj">
+      <Project>{d29d9a0f-3e52-436d-9947-6dd60bad176d}</Project>
+      <Name>TaskControlSystem.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskControlSystem.ViewModels\TaskControlSystem.ViewModels.csproj">
+      <Project>{cf8b0a9c-5bdf-4a18-a602-301d2eeed503}</Project>
+      <Name>TaskControlSystem.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

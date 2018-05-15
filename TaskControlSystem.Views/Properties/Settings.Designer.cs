@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TaskControlSystem.Terminal.Properties
+namespace TaskControlSystem.Views.Properties
 {
 
 

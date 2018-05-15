@@ -13,7 +13,7 @@ namespace TaskControlSystem.DataAccess.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201805111142510_InitialMigration"; }
+            get { return "201805141709385_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

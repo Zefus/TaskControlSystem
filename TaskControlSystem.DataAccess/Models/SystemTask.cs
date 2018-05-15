@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace TaskControlSystem.DataAccess.Models
     {
         private ICollection<SystemTask> _childSystemTasks;
         private ICollection<SystemTask> _systemTasks;
+        private int? _planCompletionTime;
 
         public int Id { get; set; }
         public string Title { get; set; }
@@ -35,14 +37,18 @@ namespace TaskControlSystem.DataAccess.Models
 
         public int? PlanCompletionTime
         {
-            get => CompletionDate.Subtract(RegisterDate).Days + 1
-               + ChildSystemTasks.Sum(cst => cst.PlanCompletionTime);
+            get => ChildSystemTasks == null ? _planCompletionTime
+                : ChildSystemTasks.Sum(cst => cst.PlanCompletionTime);
+            set
+            {
+                _planCompletionTime = value;
+                OnPropertyChanged();
+            }
         }
 
         public int? FactCompletionTime
         {
-            get => DateTime.Now.Subtract(RegisterDate).Days + 1
-               + ChildSystemTasks.Sum(cst => cst.FactCompletionTime);
+            get => CompletionDate.Subtract(RegisterDate).Days + 1;
         }
 
         public virtual ICollection<SystemTask> ChildSystemTasks

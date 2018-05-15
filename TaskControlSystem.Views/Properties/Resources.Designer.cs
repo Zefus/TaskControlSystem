@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TaskControlSystem.Terminal.Properties
+namespace TaskControlSystem.Views.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace TaskControlSystem.Terminal.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TaskControlSystem.Terminal.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TaskControlSystem.Views.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

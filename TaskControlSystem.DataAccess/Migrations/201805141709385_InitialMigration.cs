@@ -18,6 +18,7 @@ namespace TaskControlSystem.DataAccess.Migrations
                         Status = c.Byte(nullable: false),
                         RegisterDate = c.DateTime(nullable: false, precision: 0, storeType: "datetime2"),
                         CompletionDate = c.DateTime(nullable: false, precision: 0, storeType: "datetime2"),
+                        PlanCompletionTime = c.Int(),
                         SystemTask_Id = c.Int(),
                         ParentSystemTask_Id = c.Int(),
                         SystemTask_Id1 = c.Int(),

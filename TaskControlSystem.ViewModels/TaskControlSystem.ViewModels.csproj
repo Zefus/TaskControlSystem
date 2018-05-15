@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E7AE80C0-2977-4C7C-8E73-D1458FC6877F}</ProjectGuid>
+    <ProjectGuid>{CF8B0A9C-5BDF-4A18-A602-301D2EEED503}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TaskControlSystem.DataAccess</RootNamespace>
-    <AssemblyName>TaskControlSystem.DataAccess</AssemblyName>
+    <RootNamespace>TaskControlSystem.ViewModels</RootNamespace>
+    <AssemblyName>TaskControlSystem.ViewModels</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,14 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,24 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201805141709385_InitialMigration.cs" />
-    <Compile Include="Migrations\201805141709385_InitialMigration.Designer.cs">
-      <DependentUpon>201805141709385_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\SystemTask.cs" />
-    <Compile Include="Models\TaskStatus.cs" />
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805141709385_InitialMigration.resx">
-      <DependentUpon>201805141709385_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\TaskControlSystem.BusinessLogic\TaskControlSystem.BusinessLogic.csproj">
+      <Project>{cb4f2a81-d5ec-453c-882a-811c20a1165b}</Project>
+      <Name>TaskControlSystem.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskControlSystem.DataAccess\TaskControlSystem.DataAccess.csproj">
+      <Project>{e7ae80c0-2977-4c7c-8e73-d1458fc6877f}</Project>
+      <Name>TaskControlSystem.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskControlSystem.Infrastructure\TaskControlSystem.Infrastructure.csproj">
+      <Project>{d29d9a0f-3e52-436d-9947-6dd60bad176d}</Project>
+      <Name>TaskControlSystem.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

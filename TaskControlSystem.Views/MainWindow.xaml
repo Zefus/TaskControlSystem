@@ -1,0 +1,63 @@
+﻿<Window x:Class="TaskControlSystem.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskControlSystem.Views"
+        xmlns:loc="clr-namespace:TaskControlSystem.DataAccess.Models;assembly=TaskControlSystem.DataAccess"
+        mc:Ignorable="d"
+        DataContext="{Binding MainViewModel}"
+        Title="MainWindow" Height="500" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--<TextBlock Text="{Binding Path=mess}"/>-->
+        <GroupBox Grid.Column="0" Grid.RowSpan="5" Header="Задачи" Margin="2">
+            <ScrollViewer>
+
+                <ScrollViewer.Resources>
+
+                    <HierarchicalDataTemplate x:Key="NameTemplate"
+                                          ItemsSource="{Binding Path=ChildSystemTasks}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <!--<Image x:Name="Image" Stretch="Uniform" Width="16" Height="16"/>-->
+                            <TextBlock Text="{Binding Path=Title}" FontStyle="Normal" FontSize="13" Margin="10,0,0,0"/>
+                        </StackPanel>
+                        <!--<HierarchicalDataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=Status}" Value="{x:Static loc:TaskStatus.Appointed}">
+                                <Setter TargetName="Image" Property="Source" Value="Icons/TaskIcons/NewTaskIcon.ico"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Status}" Value="{x:Static loc:TaskStatus.Performed}">
+                                <Setter TargetName="Image" Property="Source" Value="Icons/TaskIcons/InProgressTaskIcon.ico"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Status}" Value="{x:Static loc:TaskStatus.Suspended}">
+                                <Setter TargetName="Image" Property="Source" Value="Icons/TaskIcons/StoppedTaskIcon.ico"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Status}" Value="{x:Static loc:TaskStatus.Completed}">
+                                <Setter TargetName="Image" Property="Source" Value="Icons/TaskIcons/ComplitedTaskIcon.ico"/>
+                            </DataTrigger>
+                        </HierarchicalDataTemplate.Triggers>-->
+                    </HierarchicalDataTemplate>
+                </ScrollViewer.Resources>
+
+                <local:ExtendedTreeView Grid.Column="0" Grid.Row="2"
+                                    ItemsSource="{Binding Tasks}"
+                                    BorderBrush="White"
+                                    ItemTemplate="{StaticResource NameTemplate}"
+                                    SelectedItem_="{Binding SelectedTask, Mode=TwoWay}"/>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</Window>
