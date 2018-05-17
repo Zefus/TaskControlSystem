@@ -10,6 +10,6 @@ namespace TaskControlSystem.BusinessLogic
 {
     public interface IEditTaskOperation
     {
-        void Execute(SystemTask selectedTask, EditTaskViewModel editTaskViewModel);
+        void Execute(SystemTask selectedTask);
     }
 }

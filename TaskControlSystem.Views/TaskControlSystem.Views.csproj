@@ -72,6 +72,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EditTaskControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +87,11 @@
     <Compile Include="CreateTaskControl.xaml.cs">
       <DependentUpon>CreateTaskControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditTaskControl.xaml.cs">
+      <DependentUpon>EditTaskControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EnumValueDescription.cs" />
+    <Compile Include="EnumValuesExtension.cs" />
     <Compile Include="ExtendedTreeView.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

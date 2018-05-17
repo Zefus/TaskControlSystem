@@ -20,8 +20,14 @@ namespace TaskControlSystem.ViewModels
     {
         private ObservableCollection<SystemTask> _tasks;
         private SystemTask _selectedTask;
-        private CreateTaskViewModel _createTaskViewModel;
         private DelegateCommand _createTaskCommand;
+        private DelegateCommand _editTaskCommand;
+        private DelegateCommand _showCreateViewCommand;
+        private DelegateCommand _cancelCommand;
+        private bool _isVisibleCreateView;
+        private bool _isVisibleCreateButton;
+        private bool _isTerminalTask;
+        private bool _isVisibleEditingView;
 
         public ObservableCollection<SystemTask> Tasks
         {
@@ -33,15 +39,37 @@ namespace TaskControlSystem.ViewModels
             }
         }
 
-        public CreateTaskViewModel CreateTaskViewModel
+        public bool IsVisibleCreateView
         {
-            get => _createTaskViewModel;
+            get => _isVisibleCreateView;
             set
             {
-                _createTaskViewModel = value;
+                _isVisibleCreateView = value;
                 OnPropertyChanged();
             }
         }
+
+        public bool IsVisibleEditingView
+        {
+            get => _isVisibleEditingView;
+            set
+            {
+                _isVisibleEditingView = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsVisibleCreateButton
+        {
+            get => _isVisibleCreateButton;
+            set
+            {
+                _isVisibleCreateButton = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsTerminalTask { get; set; }
 
         public SystemTask SelectedTask
         {
@@ -49,8 +77,9 @@ namespace TaskControlSystem.ViewModels
             set
             {
                 _selectedTask = value;
-                //IsVisibleCreateView = false;
-                //IsVisibleEditView = true;
+                IsVisibleCreateButton = false;
+                IsVisibleCreateView = false;
+                IsVisibleEditingView = true;
                 OnPropertyChanged();
             }
         }
@@ -60,16 +89,63 @@ namespace TaskControlSystem.ViewModels
             get => _createTaskCommand ?? (_createTaskCommand = new DelegateCommand(CreateTask));
         }
 
+        public DelegateCommand EditTaskCommand
+        {
+            get => _editTaskCommand ?? (_editTaskCommand = new DelegateCommand(EditTask));
+        }
+
+        public DelegateCommand ShowCreateViewCommand
+        {
+            get => _showCreateViewCommand ?? (_showCreateViewCommand = new DelegateCommand(ShowCreateView));
+        }
+
+        public DelegateCommand CancelCommand
+        {
+            get => _cancelCommand ?? (_cancelCommand = new DelegateCommand(Cancel));
+        }
+
         public MainViewModel()
         {
-            CreateTaskViewModel = new CreateTaskViewModel();
+            SelectedTask = new SystemTask();
+            IsVisibleCreateButton = true;
+            IsVisibleCreateView = false;
+            IsVisibleEditingView = false;
+        }
+
+        public void ShowCreateView()
+        {
+            SelectedTask = new SystemTask();
+            IsVisibleCreateButton = false;
+            IsVisibleCreateView = true;
+            IsVisibleEditingView = false;
+        }
+
+        public void Cancel()
+        {
+            IsVisibleCreateButton = true;
+            IsVisibleCreateView = false;
+            IsVisibleEditingView = false;
         }
 
         public void CreateTask()
         {
-            CreateTaskOperation.Execute(CreateTaskViewModel);
+            CreateTaskOperation.Execute(SelectedTask);
             ReloadTasks();
         }
+
+        public void EditTask()
+        {
+            EditTaskOperation.Execute(SelectedTask);
+            ReloadTasks();
+            IsVisibleCreateButton = true;
+            IsVisibleCreateView = false;
+            IsVisibleEditingView = false;
+        }
+
+        //public void AddSubTask()
+        //{
+        //    AddSubTaskOperation.Execute(SelectedTask);
+        //}
 
         [Import(typeof(IRepositoryProvider))]
         private IRepositoryProvider RepositoryProvider { get; set; }
@@ -85,6 +161,10 @@ namespace TaskControlSystem.ViewModels
 
         [Import]
         public ICreateTaskOperation CreateTaskOperation { get; set; }
+        [Import]
+        public IEditTaskOperation EditTaskOperation { get; set; }
+        [Import]
+        public IAddSubTaskOperation AddSubTaskOperation { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

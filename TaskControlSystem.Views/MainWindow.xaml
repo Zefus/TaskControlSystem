@@ -8,6 +8,11 @@
         mc:Ignorable="d"
         DataContext="{Binding MainViewModel}"
         Title="MainWindow" Height="500" Width="700">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -60,7 +65,19 @@
             </ScrollViewer>
         </GroupBox>
 
-        <local:CreateTaskControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="5"/>
+        <Button Grid.Column="1" Grid.Row="4" Margin="25"
+                Content="Создать задачу"
+                Command="{Binding ShowCreateViewCommand}"
+                Visibility="{Binding Path=IsVisibleCreateButton, 
+                                     Converter={StaticResource VisibilityConverter}}"/>
+
+        <local:CreateTaskControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="5"
+                                 Visibility="{Binding Path=IsVisibleCreateView, 
+                                                      Converter={StaticResource VisibilityConverter}}"/>
+        
+        <local:EditTaskControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="5"
+                               Visibility="{Binding Path=IsVisibleEditingView, 
+                                                    Converter={StaticResource VisibilityConverter}}"/>
 
     </Grid>
 </Window>

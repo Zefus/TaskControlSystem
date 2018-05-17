@@ -16,23 +16,23 @@ namespace TaskControlSystem.BusinessLogic.Operations
         [Import]
         private IRepositoryProvider _repositoryProvider;
 
-        public void Execute(SystemTask parentTask, CreateTaskViewModel childTask)
+        public void Execute(SystemTask parentTask)
         {
             var repository = _repositoryProvider.GetRepository<SystemTask>();
 
-            SystemTask task = new SystemTask
-            {
-                Title = childTask.Title,
-                Description = childTask.Descriptiion,
-                Executors = childTask.Executors,
-                Status = TaskStatus.Appointed,
-                RegisterDate = childTask.RegisterDate,
-                CompletionDate = childTask.CompletionDate,
-                ParentSystemTask = parentTask
-            };
+            //SystemTask task = new SystemTask
+            //{
+            //    Title = childTask.Title,
+            //    Description = childTask.Descriptiion,
+            //    Executors = childTask.Executors,
+            //    Status = TaskStatus.Appointed,
+            //    RegisterDate = childTask.RegisterDate,
+            //    CompletionDate = childTask.CompletionDate,
+            //    ParentSystemTask = parentTask
+            //};
 
-            repository.Find(parentTask.Id).ChildSystemTasks.Add(task);
-            _repositoryProvider.SaveChanges();
+            //repository.Find(parentTask.Id).ChildSystemTasks.Add(task);
+            //_repositoryProvider.SaveChanges();
         }
     }
 }

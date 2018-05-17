@@ -10,6 +10,6 @@ namespace TaskControlSystem.BusinessLogic
 {
     public interface IAddSubTaskOperation
     {
-        void Execute(SystemTask parentTask, CreateTaskViewModel childTask);
+        void Execute(SystemTask parentTask);
     }
 }

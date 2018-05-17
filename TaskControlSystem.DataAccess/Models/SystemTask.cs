@@ -27,7 +27,16 @@ namespace TaskControlSystem.DataAccess.Models
 
         public bool IsTerminal
         {
-            get => ChildSystemTasks == null ? true : false;
+            get
+            {
+                if (ChildSystemTasks == null)
+                    return false;
+                if (ChildSystemTasks.Count == 0)
+                    return true;
+                else
+                    return false;
+            }
+            //get => ChildSystemTasks.Count == 0 || ChildSystemTasks == null ? true : false;
         }
 
         public bool IsRoot
@@ -37,8 +46,17 @@ namespace TaskControlSystem.DataAccess.Models
 
         public int? PlanCompletionTime
         {
-            get => ChildSystemTasks == null ? _planCompletionTime
-                : ChildSystemTasks.Sum(cst => cst.PlanCompletionTime);
+            get
+            {
+                if (ChildSystemTasks == null)
+                    return 0;
+                if (ChildSystemTasks.Count == 0)
+                    return _planCompletionTime;
+                else
+                    return ChildSystemTasks.Sum(cst => cst.PlanCompletionTime);
+            }
+            //get => ChildSystemTasks.Count == 0 || ChildSystemTasks == null ? 0
+            //    : ChildSystemTasks.Sum(cst => cst.PlanCompletionTime);
             set
             {
                 _planCompletionTime = value;

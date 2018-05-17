@@ -16,17 +16,17 @@ namespace TaskControlSystem.BusinessLogic.Operations
         [Import]
         private IRepositoryProvider _repositoryProvider;
 
-        public void Execute(SystemTask selectedTask, EditTaskViewModel editTaskViewModel)
+        public void Execute(SystemTask selectedTask)
         {
             var repository = _repositoryProvider.GetRepository<SystemTask>();
 
             var taskToEdit = repository.Find(selectedTask.Id);
 
-            taskToEdit.Title = editTaskViewModel.Title;
-            taskToEdit.Description = editTaskViewModel.Descriptiion;
-            taskToEdit.Executors = editTaskViewModel.Executors;
-            taskToEdit.RegisterDate = editTaskViewModel.RegisterDate;
-            taskToEdit.CompletionDate = editTaskViewModel.CompletionDate;
+            taskToEdit.Title = selectedTask.Title;
+            taskToEdit.Description = selectedTask.Description;
+            taskToEdit.Executors = selectedTask.Executors;
+            taskToEdit.RegisterDate = selectedTask.RegisterDate;
+            taskToEdit.CompletionDate = selectedTask.CompletionDate;
 
             _repositoryProvider.SaveChanges();
         }
