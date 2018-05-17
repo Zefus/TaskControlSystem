@@ -23,12 +23,15 @@ namespace TaskControlSystem.ViewModels
         private DelegateCommand _createTaskCommand;
         private DelegateCommand _editTaskCommand;
         private DelegateCommand _removeTaskCommand;
+        private DelegateCommand _addSubTaskCommand;
         private DelegateCommand _showCreateViewCommand;
+        private DelegateCommand _showAddSubTaskViewCommand;
         private DelegateCommand _cancelCommand;
         private bool _isVisibleCreateView;
         private bool _isVisibleCreateButton;
         private bool _isTerminalTask;
         private bool _isVisibleEditingView;
+        private bool _isVisibleAddSubTaskView;
 
         public ObservableCollection<SystemTask> Tasks
         {
@@ -56,6 +59,16 @@ namespace TaskControlSystem.ViewModels
             set
             {
                 _isVisibleEditingView = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsVisibleAddSubTaskView
+        {
+            get => _isVisibleAddSubTaskView;
+            set
+            {
+                _isVisibleAddSubTaskView = value;
                 OnPropertyChanged();
             }
         }
@@ -100,6 +113,11 @@ namespace TaskControlSystem.ViewModels
             get => _removeTaskCommand ?? (_removeTaskCommand = new DelegateCommand(RemoveTask));
         }
 
+        public DelegateCommand AddSubTaskCommand
+        {
+            get => _addSubTaskCommand ?? (_addSubTaskCommand = new DelegateCommand(AddSubTask));
+        }
+
         public DelegateCommand ShowCreateViewCommand
         {
             get => _showCreateViewCommand ?? (_showCreateViewCommand = new DelegateCommand(ShowCreateView));
@@ -110,12 +128,18 @@ namespace TaskControlSystem.ViewModels
             get => _cancelCommand ?? (_cancelCommand = new DelegateCommand(Cancel));
         }
 
+        public DelegateCommand ShowAddSubTaskViewCommand
+        {
+            get => _showAddSubTaskViewCommand ?? (_showAddSubTaskViewCommand = new DelegateCommand(ShowAddSubTaskView));
+        }
+
         public MainViewModel()
         {
             SelectedTask = new SystemTask();
             IsVisibleCreateButton = true;
             IsVisibleCreateView = false;
             IsVisibleEditingView = false;
+            IsVisibleAddSubTaskView = false;
         }
 
         public void ShowCreateView()
@@ -124,6 +148,15 @@ namespace TaskControlSystem.ViewModels
             IsVisibleCreateButton = false;
             IsVisibleCreateView = true;
             IsVisibleEditingView = false;
+            IsVisibleAddSubTaskView = false;
+        }
+
+        public void ShowAddSubTaskView()
+        {
+            IsVisibleCreateButton = false;
+            IsVisibleCreateView = false;
+            IsVisibleEditingView = false;
+            IsVisibleAddSubTaskView = true;
         }
 
         public void Cancel()
@@ -131,6 +164,7 @@ namespace TaskControlSystem.ViewModels
             IsVisibleCreateButton = true;
             IsVisibleCreateView = false;
             IsVisibleEditingView = false;
+            IsVisibleAddSubTaskView = false;
         }
 
         public void CreateTask()
@@ -148,10 +182,11 @@ namespace TaskControlSystem.ViewModels
             IsVisibleEditingView = false;
         }
 
-        //public void AddSubTask()
-        //{
-        //    AddSubTaskOperation.Execute(SelectedTask);
-        //}
+        public void AddSubTask()
+        {
+            AddSubTaskOperation.Execute(SelectedTask);
+            ReloadTasks();
+        }
 
         public void RemoveTask()
         {

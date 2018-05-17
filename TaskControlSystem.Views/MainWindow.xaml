@@ -79,5 +79,9 @@
                                Visibility="{Binding Path=IsVisibleEditingView, 
                                                     Converter={StaticResource VisibilityConverter}}"/>
 
+        <local:AddSubTaskControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="5"
+                                 Visibility="{Binding Path=IsVisibleAddSubTaskView,
+                                                      Converter={StaticResource VisibilityConverter}}"/>
+
     </Grid>
 </Window>

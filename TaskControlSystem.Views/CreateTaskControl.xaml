@@ -36,25 +36,25 @@
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                          Text="{Binding Path=SelectedTask.Title}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0"
+            <TextBlock Grid.Row="1" Grid.Column="0"
                            VerticalAlignment="Center"
                            Text="Описание задачи:" FontWeight="Bold" FontSize="13"/>
-            <TextBox Grid.Row="3" Grid.RowSpan="2" 
+            <TextBox Grid.Row="2" Grid.RowSpan="2" 
                          Grid.ColumnSpan="2" Grid.Column="0" Margin="5"
                          Text="{Binding Path=SelectedTask.Description}"/>
 
-            <TextBlock Grid.Row="5" Grid.Column="0"
+            <TextBlock Grid.Row="4" Grid.Column="0"
                            VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
                            Text="Список исполнителей:"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="5"
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="5"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
                          Text="{Binding Path=SelectedTask.Executors}"/>
 
-            <TextBlock Grid.Row="7" Grid.Column="0"
+            <TextBlock Grid.Row="5" Grid.Column="0"
                            VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
                            Text="Планируемое время выполнения:"/>
-            <TextBlock Grid.Row="7" Grid.Column="1"
+            <TextBlock Grid.Row="5" Grid.Column="1"
                            VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid HorizontalAlignment="Stretch" Width="92" >
                         <Grid.ColumnDefinitions>
