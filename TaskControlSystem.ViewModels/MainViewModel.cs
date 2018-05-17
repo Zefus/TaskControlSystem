@@ -22,6 +22,7 @@ namespace TaskControlSystem.ViewModels
         private SystemTask _selectedTask;
         private DelegateCommand _createTaskCommand;
         private DelegateCommand _editTaskCommand;
+        private DelegateCommand _removeTaskCommand;
         private DelegateCommand _showCreateViewCommand;
         private DelegateCommand _cancelCommand;
         private bool _isVisibleCreateView;
@@ -94,6 +95,11 @@ namespace TaskControlSystem.ViewModels
             get => _editTaskCommand ?? (_editTaskCommand = new DelegateCommand(EditTask));
         }
 
+        public DelegateCommand RemoveTaskCommand
+        {
+            get => _removeTaskCommand ?? (_removeTaskCommand = new DelegateCommand(RemoveTask));
+        }
+
         public DelegateCommand ShowCreateViewCommand
         {
             get => _showCreateViewCommand ?? (_showCreateViewCommand = new DelegateCommand(ShowCreateView));
@@ -147,6 +153,12 @@ namespace TaskControlSystem.ViewModels
         //    AddSubTaskOperation.Execute(SelectedTask);
         //}
 
+        public void RemoveTask()
+        {
+            RemoveTaskOperation.Execute(SelectedTask);
+            ReloadTasks();
+        }
+
         [Import(typeof(IRepositoryProvider))]
         private IRepositoryProvider RepositoryProvider { get; set; }
         public void ReloadTasks()
@@ -165,6 +177,8 @@ namespace TaskControlSystem.ViewModels
         public IEditTaskOperation EditTaskOperation { get; set; }
         [Import]
         public IAddSubTaskOperation AddSubTaskOperation { get; set; }
+        [Import]
+        public IRemoveTaskOperation RemoveTaskOperation { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

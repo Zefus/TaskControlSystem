@@ -19,7 +19,9 @@ namespace TaskControlSystem.BusinessLogic.Operations
         {
             var repository = _repositoryProvider.GetRepository<SystemTask>();
 
-            repository.Remove(selectedTask);
+            var taskToRemove = repository.Find(selectedTask.Id);
+
+            repository.Remove(taskToRemove);
 
             _repositoryProvider.SaveChanges();
         }
