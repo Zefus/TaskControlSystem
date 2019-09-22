@@ -8,7 +8,7 @@ namespace TaskControlSystem.Views
         public ExtendedTreeView()
             : base()
         {
-            this.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(___ICH);
+            SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(___ICH);
         }
 
         void ___ICH(object sender, RoutedPropertyChangedEventArgs<object> e)

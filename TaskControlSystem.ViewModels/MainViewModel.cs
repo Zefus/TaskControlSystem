@@ -196,15 +196,12 @@ namespace TaskControlSystem.ViewModels
 
         [Import(typeof(IRepositoryProvider))]
         private IRepositoryProvider RepositoryProvider { get; set; }
-        public void ReloadTasks()
-        {
-            Tasks = new ObservableCollection<SystemTask>(
+        public void ReloadTasks() => Tasks = new ObservableCollection<SystemTask>(
                 RepositoryProvider
                 .GetRepository<SystemTask>()
                 .GetAll()
                 .Where(t => t.ParentSystemTask == null)
                 .ToList());
-        }
 
         [Import]
         public ICreateTaskOperation CreateTaskOperation { get; set; }

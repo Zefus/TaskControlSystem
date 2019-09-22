@@ -41,12 +41,10 @@ namespace TaskControlSystem.Views
             }
             catch (CompositionException compositionException)
             {
-                System.Console.WriteLine(compositionException.ToString());
+                Console.WriteLine(compositionException.ToString());
             }
 
-            //viewModel.func();
             viewModel.ReloadTasks();
-            //viewModel.CreateTask();
             window.Show();
         }
 

@@ -11,7 +11,7 @@ namespace TaskControlSystem.DataAccess
 {
     public class TaskContext : DbContext
     {
-        public TaskContext() : base("TaskControlSystemDb") { }
+        public TaskContext() : base("TaskControl") { }
 
         public IDbSet<SystemTask> Tasks { get; set; }
 
