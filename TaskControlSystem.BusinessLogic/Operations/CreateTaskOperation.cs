@@ -16,19 +16,21 @@ namespace TaskControlSystem.BusinessLogic.Operations
         [Import]
         private IRepositoryProvider _repositoryProvider;
 
-        public void Execute(SystemTask createdTask)
+        public void Execute(CreateTaskViewModel createTaskViewModel)
         {
             var repository = _repositoryProvider.GetRepository<SystemTask>();
 
             SystemTask task = new SystemTask
             {
-                Title = createdTask.Title,
-                Description = createdTask.Description,
-                Executors = createdTask.Executors,
+                Title = createTaskViewModel.Title,
+                Description = createTaskViewModel.Description,
+                Executors = createTaskViewModel.Executors,
                 Status = TaskStatus.Appointed,
                 RegisterDate = DateTime.Now,
+                PlanCompletionTime = createTaskViewModel.PlanCompletionTime,
                 ParentSystemTask = null
             };
+            task.CompletionDate = task.RegisterDate.AddDays(Convert.ToDouble(task.PlanCompletionTime));
 
             repository.Add(task);
             _repositoryProvider.SaveChanges();

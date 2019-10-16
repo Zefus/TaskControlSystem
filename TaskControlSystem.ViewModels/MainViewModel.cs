@@ -20,6 +20,7 @@ namespace TaskControlSystem.ViewModels
     {
         private ObservableCollection<SystemTask> _tasks;
         private SystemTask _selectedTask;
+        private CreateTaskViewModel _createTaskViewModel;
         private DelegateCommand _createTaskCommand;
         private DelegateCommand _editTaskCommand;
         private DelegateCommand _removeTaskCommand;
@@ -98,6 +99,16 @@ namespace TaskControlSystem.ViewModels
             }
         }
 
+        public CreateTaskViewModel CreateTaskViewModel
+        {
+            get => _createTaskViewModel;
+            set
+            {
+                _createTaskViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         public DelegateCommand CreateTaskCommand
         {
             get => _createTaskCommand ?? (_createTaskCommand = new DelegateCommand(CreateTask));
@@ -136,10 +147,8 @@ namespace TaskControlSystem.ViewModels
         public MainViewModel()
         {
             SelectedTask = new SystemTask();
-            IsVisibleCreateButton = true;
-            IsVisibleCreateView = false;
-            IsVisibleEditingView = false;
-            IsVisibleAddSubTaskView = false;
+            CreateTaskViewModel = new CreateTaskViewModel();
+            ShowMainWindow();
         }
 
         public void ShowCreateView()
@@ -161,6 +170,11 @@ namespace TaskControlSystem.ViewModels
 
         public void Cancel()
         {
+            ShowMainWindow();
+        }
+
+        public void ShowMainWindow()
+        {
             IsVisibleCreateButton = true;
             IsVisibleCreateView = false;
             IsVisibleEditingView = false;
@@ -169,17 +183,18 @@ namespace TaskControlSystem.ViewModels
 
         public void CreateTask()
         {
-            CreateTaskOperation.Execute(SelectedTask);
+            CreateTaskOperation.Execute(CreateTaskViewModel);
             ReloadTasks();
+            CreateTaskViewModel = new CreateTaskViewModel();
+            ShowMainWindow();
         }
 
         public void EditTask()
         {
             EditTaskOperation.Execute(SelectedTask);
             ReloadTasks();
-            IsVisibleCreateButton = true;
-            IsVisibleCreateView = false;
-            IsVisibleEditingView = false;
+            SelectedTask = new SystemTask();
+            ShowMainWindow();
         }
 
         public void AddSubTask()

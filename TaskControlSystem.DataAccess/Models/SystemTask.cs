@@ -11,7 +11,7 @@ using TaskControlSystem.DataAccess.Models;
 
 namespace TaskControlSystem.DataAccess.Models
 {
-    public class SystemTask : INotifyPropertyChanged
+    public class SystemTask
     {
         private ICollection<SystemTask> _childSystemTasks;
         private ICollection<SystemTask> _systemTasks;
@@ -46,21 +46,22 @@ namespace TaskControlSystem.DataAccess.Models
 
         public int? PlanCompletionTime
         {
-            get
-            {
-                if (ChildSystemTasks == null)
-                    return 0;
-                if (ChildSystemTasks.Count == 0)
-                    return _planCompletionTime;
-                else
-                    return ChildSystemTasks.Sum(cst => cst.PlanCompletionTime);
-            }
+            get => _planCompletionTime;
+            //get
+            //{
+            //    if (ChildSystemTasks == null)
+            //        return 0;
+            //    if (ChildSystemTasks.Count == 0)
+            //        return _planCompletionTime;
+            //    else
+            //        return ChildSystemTasks.Sum(cst => cst.PlanCompletionTime);
+            //}
             //get => ChildSystemTasks.Count == 0 || ChildSystemTasks == null ? 0
             //    : ChildSystemTasks.Sum(cst => cst.PlanCompletionTime);
             set
             {
                 _planCompletionTime = value;
-                OnPropertyChanged();
+                //OnPropertyChanged();
             }
         }
 
@@ -75,7 +76,7 @@ namespace TaskControlSystem.DataAccess.Models
             set
             {
                 _childSystemTasks = value;
-                OnPropertyChanged();
+                //OnPropertyChanged();
             }
         }
         public virtual ICollection<SystemTask> SystemTasks
@@ -84,17 +85,17 @@ namespace TaskControlSystem.DataAccess.Models
             set
             {
                 _systemTasks = value;
-                OnPropertyChanged();
+                //OnPropertyChanged();
             }
         }
 
         public virtual SystemTask ParentSystemTask { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
     }
 }

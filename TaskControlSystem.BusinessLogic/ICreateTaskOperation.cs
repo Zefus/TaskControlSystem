@@ -10,6 +10,6 @@ namespace TaskControlSystem.BusinessLogic
 {
     public interface ICreateTaskOperation
     {
-        void Execute(SystemTask createdTask);
+        void Execute(CreateTaskViewModel createTaskViewModel);
     }
 }
