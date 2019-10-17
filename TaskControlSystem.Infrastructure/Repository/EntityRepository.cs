@@ -13,29 +13,32 @@ namespace TaskControlSystem.Infrastructure.Repository
     public class EntityRepository<T> : IRepository<T> where T : class
     {
         private readonly DbContext _dbContext;
+        public DbSet<T> Set { get; }
 
+        #region Sync Repasitory
         public EntityRepository(DbContext db)
         {
             _dbContext = db;
+            Set = _dbContext.Set<T>();
         }
 
-        public void Add(T item)
+        public void Add(T entity)
         {
             var dbSet = _dbContext.Set<T>();
-            dbSet.Add(item);
+            dbSet.Add(entity);
         }
 
-        public void Remove(T item)
+        public void Remove(T entity)
         {
             var dbSet = _dbContext.Set<T>();
-            dbSet.Remove(item);
+            dbSet.Remove(entity);
         }
 
-        public T Find(int id)
+        public T Find(params object[] keyValues)
         {
             var dbSet = _dbContext.Set<T>();
-            var item = dbSet.Find(id);
-            return item;
+            var entity = dbSet.Find(keyValues);
+            return entity;
         }
 
         public IQueryable<T> GetAll()
@@ -43,5 +46,33 @@ namespace TaskControlSystem.Infrastructure.Repository
             var dbSet = _dbContext.Set<T>();
             return dbSet;
         }
+        #endregion
+
+        #region Async Repasitory
+        public Task AddAsync(T entity)
+        {
+            var dbSet = _dbContext.Set<T>();
+            dbSet.Add(entity);
+            return InternalHelper.CompletedTask;
+        }
+
+        public Task RemoveAsync(T entity)
+        {
+            Set.Remove(entity);
+            return InternalHelper.CompletedTask;
+        }
+
+        public async Task<T> FindAsync(params object[] keyValues)
+        {
+            T entity = await Set.FindAsync(keyValues).ConfigureAwait(false);
+            return entity ?? throw new Exception("Entity is not found");
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            var dbSet = _dbContext.Set<T>();
+            return await dbSet.ToListAsync();
+        }
+        #endregion
     }
 }

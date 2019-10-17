@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Input;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Microsoft.Expression.Interactivity.Core;
+using System.Threading.Tasks;
 using TaskControlSystem.ViewModels.Commands;
 using System.ComponentModel.Composition;
 using TaskControlSystem.Infrastructure;
@@ -181,12 +181,13 @@ namespace TaskControlSystem.ViewModels
             IsVisibleAddSubTaskView = false;
         }
 
-        public void CreateTask()
+        public async Task<bool> CreateTask()
         {
-            CreateTaskOperation.Execute(CreateTaskViewModel);
+            await CreateTaskOperation.ExecuteAsync(CreateTaskViewModel);
             ReloadTasks();
             CreateTaskViewModel = new CreateTaskViewModel();
             ShowMainWindow();
+            return true;
         }
 
         public void EditTask()

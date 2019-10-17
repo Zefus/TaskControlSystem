@@ -11,5 +11,6 @@ namespace TaskControlSystem.Infrastructure
     {
         IRepository<T> GetRepository<T>() where T : class;
         void SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

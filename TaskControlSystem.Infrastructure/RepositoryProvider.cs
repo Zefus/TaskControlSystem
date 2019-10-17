@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using System.ComponentModel.Composition;
 using Microsoft.Practices.ServiceLocation;
 using TaskControlSystem.DataAccess;
 using TaskControlSystem.Infrastructure.Repository;
-using System.Data.Entity;
 
 namespace TaskControlSystem.Infrastructure
 {
@@ -41,7 +41,11 @@ namespace TaskControlSystem.Infrastructure
         public virtual void SaveChanges()
         {
             _dbContext.SaveChanges();
-            return;
+        }
+
+        public virtual Task<int> SaveChangesAsync()
+        {
+           return _dbContext.SaveChangesAsync();
         }
 
         protected virtual void Dispose(bool disposing)

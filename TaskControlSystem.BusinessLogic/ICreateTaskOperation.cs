@@ -11,5 +11,6 @@ namespace TaskControlSystem.BusinessLogic
     public interface ICreateTaskOperation
     {
         void Execute(CreateTaskViewModel createTaskViewModel);
+        Task<bool> ExecuteAsync(CreateTaskViewModel createTaskViewModel);
     }
 }
