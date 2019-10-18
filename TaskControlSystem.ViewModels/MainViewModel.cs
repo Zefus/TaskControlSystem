@@ -21,7 +21,8 @@ namespace TaskControlSystem.ViewModels
         private ObservableCollection<SystemTask> _tasks;
         private SystemTask _selectedTask;
         private CreateTaskViewModel _createTaskViewModel;
-        private DelegateCommand _createTaskCommand;
+        private AsyncCommand _createTaskCommand;
+        //private DelegateCommand _createTaskCommand;
         private DelegateCommand _editTaskCommand;
         private DelegateCommand _removeTaskCommand;
         private DelegateCommand _addSubTaskCommand;
@@ -109,25 +110,25 @@ namespace TaskControlSystem.ViewModels
             }
         }
 
-        public DelegateCommand CreateTaskCommand
+        public AsyncCommand CreateTaskCommand
         {
-            get => _createTaskCommand ?? (_createTaskCommand = new DelegateCommand(CreateTask));
+            get => _createTaskCommand ?? (_createTaskCommand = new AsyncCommand(CreateTask));
         }
 
-        public DelegateCommand EditTaskCommand
-        {
-            get => _editTaskCommand ?? (_editTaskCommand = new DelegateCommand(EditTask));
-        }
+        //public DelegateCommand EditTaskCommand
+        //{
+        //    get => _editTaskCommand ?? (_editTaskCommand = new DelegateCommand(EditTask));
+        //}
 
-        public DelegateCommand RemoveTaskCommand
-        {
-            get => _removeTaskCommand ?? (_removeTaskCommand = new DelegateCommand(RemoveTask));
-        }
+        //public DelegateCommand RemoveTaskCommand
+        //{
+        //    get => _removeTaskCommand ?? (_removeTaskCommand = new DelegateCommand(RemoveTask));
+        //}
 
-        public DelegateCommand AddSubTaskCommand
-        {
-            get => _addSubTaskCommand ?? (_addSubTaskCommand = new DelegateCommand(AddSubTask));
-        }
+        //public DelegateCommand AddSubTaskCommand
+        //{
+        //    get => _addSubTaskCommand ?? (_addSubTaskCommand = new DelegateCommand(AddSubTask));
+        //}
 
         public DelegateCommand ShowCreateViewCommand
         {
@@ -181,42 +182,41 @@ namespace TaskControlSystem.ViewModels
             IsVisibleAddSubTaskView = false;
         }
 
-        public async Task<bool> CreateTask()
+        public async Task CreateTask()
         {
             await CreateTaskOperation.ExecuteAsync(CreateTaskViewModel);
-            ReloadTasks();
+            await ReloadTasks();
             CreateTaskViewModel = new CreateTaskViewModel();
             ShowMainWindow();
-            return true;
         }
 
-        public void EditTask()
-        {
-            EditTaskOperation.Execute(SelectedTask);
-            ReloadTasks();
-            SelectedTask = new SystemTask();
-            ShowMainWindow();
-        }
+        //public void EditTask()
+        //{
+        //    EditTaskOperation.Execute(SelectedTask);
+        //    ReloadTasks();
+        //    SelectedTask = new SystemTask();
+        //    ShowMainWindow();
+        //}
 
-        public void AddSubTask()
-        {
-            AddSubTaskOperation.Execute(SelectedTask);
-            ReloadTasks();
-        }
+        //public void AddSubTask()
+        //{
+        //    AddSubTaskOperation.Execute(SelectedTask);
+        //    ReloadTasks();
+        //}
 
-        public void RemoveTask()
-        {
-            RemoveTaskOperation.Execute(SelectedTask);
-            ReloadTasks();
-        }
+        //public void RemoveTask()
+        //{
+        //    RemoveTaskOperation.Execute(SelectedTask);
+        //    ReloadTasks();
+        //}
 
         [Import(typeof(IRepositoryProvider))]
         private IRepositoryProvider RepositoryProvider { get; set; }
-        public void ReloadTasks() => Tasks = new ObservableCollection<SystemTask>(
-                RepositoryProvider
+
+        public async Task ReloadTasks() => Tasks = new ObservableCollection<SystemTask>(
+           (await RepositoryProvider
                 .GetRepository<SystemTask>()
-                .GetAll()
-                .Where(t => t.ParentSystemTask == null)
+                .GetAsync(t => t.ParentSystemTask == null))
                 .ToList());
 
         [Import]

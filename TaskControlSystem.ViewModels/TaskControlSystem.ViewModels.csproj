@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\DelegateCommandBase.cs" />
+    <Compile Include="Commands\IAsyncCommand.cs" />
+    <Compile Include="Extensions\TaskUtilities.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.Composition;
@@ -15,7 +16,7 @@ namespace TaskControlSystem.Infrastructure.Repository
         private readonly DbContext _dbContext;
         public DbSet<T> Set { get; }
 
-        #region Sync Repasitory
+        #region Sync Repository
         public EntityRepository(DbContext db)
         {
             _dbContext = db;
@@ -41,14 +42,14 @@ namespace TaskControlSystem.Infrastructure.Repository
             return entity;
         }
 
-        public IQueryable<T> GetAll()
+        public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
         {
-            var dbSet = _dbContext.Set<T>();
+            var dbSet = _dbContext.Set<T>().Where(predicate);
             return dbSet;
         }
         #endregion
 
-        #region Async Repasitory
+        #region Async Repository
         public Task AddAsync(T entity)
         {
             var dbSet = _dbContext.Set<T>();
@@ -68,9 +69,9 @@ namespace TaskControlSystem.Infrastructure.Repository
             return entity ?? throw new Exception("Entity is not found");
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            var dbSet = _dbContext.Set<T>();
+            var dbSet = _dbContext.Set<T>().Where(predicate);
             return await dbSet.ToListAsync();
         }
         #endregion
