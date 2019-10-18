@@ -6,6 +6,7 @@ using System.ComponentModel.Composition;
 using TaskControlSystem.DataAccess.Models;
 using TaskControlSystem.Infrastructure;
 using TaskControlSystem.BusinessLogic.TaskViewModels;
+using System.Threading.Tasks;
 
 namespace TaskControlSystem.BusinessLogic.Operations
 {
@@ -33,6 +34,11 @@ namespace TaskControlSystem.BusinessLogic.Operations
 
             //repository.Find(parentTask.Id).ChildSystemTasks.Add(task);
             //_repositoryProvider.SaveChanges();
+        }
+
+        public Task<bool> ExecuteAsync(SystemTask parentTask, CreateTaskViewModel createTaskViewModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }

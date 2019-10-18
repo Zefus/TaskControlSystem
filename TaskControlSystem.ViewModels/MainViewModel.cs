@@ -23,8 +23,8 @@ namespace TaskControlSystem.ViewModels
         private CreateTaskViewModel _createTaskViewModel;
         private AsyncCommand _createTaskCommand;
         private AsyncCommand _editTaskCommand;
-        private DelegateCommand _removeTaskCommand;
-        private DelegateCommand _addSubTaskCommand;
+        private AsyncCommand _removeTaskCommand;
+        private AsyncCommand _addSubTaskCommand;
         private DelegateCommand _showCreateViewCommand;
         private DelegateCommand _showAddSubTaskViewCommand;
         private DelegateCommand _cancelCommand;
@@ -92,9 +92,7 @@ namespace TaskControlSystem.ViewModels
             set
             {
                 _selectedTask = value;
-                IsVisibleCreateButton = false;
-                IsVisibleCreateView = false;
-                IsVisibleEditingView = true;
+                ShowEditView();
                 OnPropertyChanged();
             }
         }
@@ -119,15 +117,15 @@ namespace TaskControlSystem.ViewModels
             get => _editTaskCommand ?? (_editTaskCommand = new AsyncCommand(EditTask));
         }
 
-        //public DelegateCommand RemoveTaskCommand
-        //{
-        //    get => _removeTaskCommand ?? (_removeTaskCommand = new DelegateCommand(RemoveTask));
-        //}
+        public AsyncCommand RemoveTaskCommand
+        {
+            get => _removeTaskCommand ?? (_removeTaskCommand = new AsyncCommand(RemoveTask));
+        }
 
-        //public DelegateCommand AddSubTaskCommand
-        //{
-        //    get => _addSubTaskCommand ?? (_addSubTaskCommand = new DelegateCommand(AddSubTask));
-        //}
+        public AsyncCommand AddSubTaskCommand
+        {
+            get => _addSubTaskCommand ?? (_addSubTaskCommand = new AsyncCommand(AddSubTask));
+        }
 
         public DelegateCommand ShowCreateViewCommand
         {
@@ -149,6 +147,13 @@ namespace TaskControlSystem.ViewModels
             SelectedTask = new SystemTask();
             CreateTaskViewModel = new CreateTaskViewModel();
             ShowMainWindow();
+        }
+
+        public void ShowEditView()
+        {
+            IsVisibleCreateButton = false;
+            IsVisibleCreateView = false;
+            IsVisibleEditingView = true;
         }
 
         public void ShowCreateView()
@@ -175,6 +180,8 @@ namespace TaskControlSystem.ViewModels
 
         public void ShowMainWindow()
         {
+            SelectedTask = new SystemTask();
+            CreateTaskViewModel = new CreateTaskViewModel();
             IsVisibleCreateButton = true;
             IsVisibleCreateView = false;
             IsVisibleEditingView = false;
@@ -197,17 +204,22 @@ namespace TaskControlSystem.ViewModels
             ShowMainWindow();
         }
 
-        //public void AddSubTask()
-        //{
-        //    AddSubTaskOperation.Execute(SelectedTask);
-        //    ReloadTasks();
-        //}
+        public async Task AddSubTask()
+        {
+            await AddSubTaskOperation.ExecuteAsync(SelectedTask, CreateTaskViewModel);
+            await ReloadTasks();
+            SelectedTask = new SystemTask();
+            CreateTaskViewModel = new CreateTaskViewModel();
+            ShowMainWindow();
+        }
 
-        //public void RemoveTask()
-        //{
-        //    RemoveTaskOperation.Execute(SelectedTask);
-        //    ReloadTasks();
-        //}
+        public async Task RemoveTask()
+        {
+            await RemoveTaskOperation.ExecuteAsync(SelectedTask);
+            await ReloadTasks();
+            SelectedTask = new SystemTask();
+            ShowMainWindow();
+        }
 
         [Import(typeof(IRepositoryProvider))]
         private IRepositoryProvider RepositoryProvider { get; set; }

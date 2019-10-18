@@ -11,5 +11,6 @@ namespace TaskControlSystem.BusinessLogic
     public interface IAddSubTaskOperation
     {
         void Execute(SystemTask parentTask);
+        Task<bool> ExecuteAsync(SystemTask parentTask, CreateTaskViewModel createTaskViewModel);
     }
 }

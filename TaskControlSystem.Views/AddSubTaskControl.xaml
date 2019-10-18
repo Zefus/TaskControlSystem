@@ -33,14 +33,14 @@
                            Text="Название задачи:" FontWeight="Bold" FontSize="13"/>
             <TextBox Grid.Row="0" Grid.Column="1" Margin="5"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                         Text="{Binding Path=SelectedTask.Title}"/>
+                         Text="{Binding Path=CreateTaskViewModel.Title}"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0"
                            VerticalAlignment="Center"
                            Text="Описание задачи:" FontWeight="Bold" FontSize="13"/>
             <TextBox Grid.Row="2" Grid.RowSpan="2" 
                          Grid.ColumnSpan="2" Grid.Column="0" Margin="5"
-                         Text="{Binding Path=SelectedTask.Description}"/>
+                         Text="{Binding Path=CreateTaskViewModel.Description}"/>
 
             <TextBlock Grid.Row="4" Grid.Column="0"
                            VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
@@ -48,7 +48,7 @@
             <TextBox Grid.Row="4" Grid.Column="1" Margin="5"
                          VerticalContentAlignment="Center"
                          HorizontalContentAlignment="Center"
-                         Text="{Binding Path=SelectedTask.Executors}"/>
+                         Text="{Binding Path=CreateTaskViewModel.Executors}"/>
 
             <TextBlock Grid.Row="5" Grid.Column="0"
                            VerticalAlignment="Center" FontWeight="Bold" FontSize="13"
@@ -61,7 +61,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBox   Grid.Column="0"
-                                   Text="{Binding SelectedTask.PlanCompletionTime, Mode=OneWay}"
+                                   Text="{Binding CreateTaskViewModel.PlanCompletionTime, Mode=OneWay}"
                                    HorizontalAlignment="Stretch"
                                    VerticalContentAlignment="Center"
                                    HorizontalContentAlignment="Center"
@@ -78,7 +78,7 @@
                           VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                           ItemsSource="{local:EnumValues {x:Type loc:TaskStatus}}"
                           SelectedValuePath="EnumValue" DisplayMemberPath="DisplayString"
-                          SelectedValue="{Binding Path=SelectedTask.Status, Mode=TwoWay}"/>
+                          SelectedValue="{Binding Path=CreateTaskViewModel.Status, Mode=TwoWay}"/>
 
             <Button Grid.Row="11" Grid.Column="0"
                     Margin="5"
