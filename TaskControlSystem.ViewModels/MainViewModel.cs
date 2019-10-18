@@ -22,8 +22,7 @@ namespace TaskControlSystem.ViewModels
         private SystemTask _selectedTask;
         private CreateTaskViewModel _createTaskViewModel;
         private AsyncCommand _createTaskCommand;
-        //private DelegateCommand _createTaskCommand;
-        private DelegateCommand _editTaskCommand;
+        private AsyncCommand _editTaskCommand;
         private DelegateCommand _removeTaskCommand;
         private DelegateCommand _addSubTaskCommand;
         private DelegateCommand _showCreateViewCommand;
@@ -115,10 +114,10 @@ namespace TaskControlSystem.ViewModels
             get => _createTaskCommand ?? (_createTaskCommand = new AsyncCommand(CreateTask));
         }
 
-        //public DelegateCommand EditTaskCommand
-        //{
-        //    get => _editTaskCommand ?? (_editTaskCommand = new DelegateCommand(EditTask));
-        //}
+        public AsyncCommand EditTaskCommand
+        {
+            get => _editTaskCommand ?? (_editTaskCommand = new AsyncCommand(EditTask));
+        }
 
         //public DelegateCommand RemoveTaskCommand
         //{
@@ -190,13 +189,13 @@ namespace TaskControlSystem.ViewModels
             ShowMainWindow();
         }
 
-        //public void EditTask()
-        //{
-        //    EditTaskOperation.Execute(SelectedTask);
-        //    ReloadTasks();
-        //    SelectedTask = new SystemTask();
-        //    ShowMainWindow();
-        //}
+        public async Task EditTask()
+        {
+            await EditTaskOperation.ExecuteAsync(SelectedTask);
+            await ReloadTasks();
+            SelectedTask = new SystemTask();
+            ShowMainWindow();
+        }
 
         //public void AddSubTask()
         //{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.ComponentModel.Composition;
 using TaskControlSystem.DataAccess.Models;
 using TaskControlSystem.Infrastructure;
@@ -29,6 +30,23 @@ namespace TaskControlSystem.BusinessLogic.Operations
             taskToEdit.CompletionDate = selectedTask.CompletionDate;
 
             _repositoryProvider.SaveChanges();
+        }
+
+        public async Task<bool> ExecuteAsync(SystemTask selectedTask)
+        {
+            var repository = _repositoryProvider.GetRepository<SystemTask>();
+
+            var taskToEdit = await repository.FindAsync(selectedTask.Id);
+
+            taskToEdit.Title = selectedTask.Title;
+            taskToEdit.Description = selectedTask.Description;
+            taskToEdit.Executors = selectedTask.Executors;
+            taskToEdit.RegisterDate = selectedTask.RegisterDate;
+            taskToEdit.CompletionDate = selectedTask.CompletionDate;
+
+            await _repositoryProvider.SaveChangesAsync();
+
+            return true;
         }
     }
 }
