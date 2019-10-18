@@ -41,6 +41,7 @@ namespace TaskControlSystem.BusinessLogic.Operations
             taskToEdit.Title = selectedTask.Title;
             taskToEdit.Description = selectedTask.Description;
             taskToEdit.Executors = selectedTask.Executors;
+            taskToEdit.Status = selectedTask.Status;
             taskToEdit.RegisterDate = selectedTask.RegisterDate;
             taskToEdit.CompletionDate = selectedTask.CompletionDate;
 
